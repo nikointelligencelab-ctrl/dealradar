@@ -1,0 +1,49 @@
+# Rebuilds data/deals.json on a schedule and commits it.
+# GitHub Pages has no server and no cron of its own - this workflow IS the
+# backend. It runs on GitHub's machines, writes a static file, and the deploy
+# workflow publishes it.
+name: Refresh deals
+
+on:
+  schedule:
+    # Every 6 hours. Times are UTC. Minute 17 on purpose: schedules on the
+    # hour sit in a long queue and get delayed.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:        # lets you trigger it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-deals
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Collect deals
+        env:
+          BESTBUY_API_KEY: ${{ secrets.BESTBUY_API_KEY }}
+          BESTBUY_AFFILIATE_URL: ${{ secrets.BESTBUY_AFFILIATE_URL }}
+          AFFILIATE_FEED_URLS: ${{ secrets.AFFILIATE_FEED_URLS }}
+        run: python scripts/collect.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "deal-bot"
+          git config user.email "actions@github.com"
+          git add data/deals.json
+          # No change means no commit - avoids an empty commit every 6 hours.
+          git diff --staged --quiet && echo "no change" && exit 0
+          git commit -m "data: refresh deals $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

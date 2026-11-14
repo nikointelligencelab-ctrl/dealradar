@@ -1,0 +1,49 @@
+# Publishes the site to GitHub Pages.
+# Runs on every push to main (including the data commits from refresh.yml),
+# so a fresh scrape is live within a minute or two of landing.
+name: Deploy to Pages
+
+on:
+  push:
+    branches: [main]
+  # Pushes made by refresh.yml use GITHUB_TOKEN, which does NOT trigger
+  # other workflows - so chain off the refresh run finishing instead.
+  workflow_run:
+    workflows: ["Refresh deals"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble publish directory
+        # The site reads data/deals.json relative to itself, so the data file
+        # is copied in beside the HTML rather than served from the repo root.
+        run: |
+          mkdir -p _site
+          cp -r site/* _site/
+          mkdir -p _site/data
+          cp data/deals.json _site/data/deals.json
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

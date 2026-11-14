@@ -1,0 +1,11 @@
+# RSS/Atom feeds to pull. Add only feeds you have the right to republish.
+# Each entry: url (required), store (label shown on the site).
+rss_feeds: []
+  # - url: https://example.com/deals/feed
+  #   store: Example
+
+# Tier-1 sources are configured by environment variable, not here, because
+# they carry credentials. See SETUP.md:
+#   BESTBUY_API_KEY        free key from developer.bestbuy.com
+#   BESTBUY_AFFILIATE_URL  your tracking link prefix (optional)
+#   AFFILIATE_FEED_URLS    comma-separated CSV feed URLs from CJ/Impact/etc.
