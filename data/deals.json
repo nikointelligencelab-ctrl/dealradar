@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-20T20:26:12+00:00",
+ "generated_at": "2026-11-21T07:15:27+00:00",
  "is_sample_data": true,
  "counts": {
   "bestbuy": 0,
@@ -49,7 +49,7 @@
    "end": "2026-11-28",
    "peak": "2026-11-27"
   },
-  "days_until_next": 7
+  "days_until_next": 6
  },
  "deals": [
   {
@@ -64,7 +64,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "2c1d229677ada275",
    "discount_pct": 47,
    "savings": 80.0
@@ -81,7 +81,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "41bc292925f73ffa",
    "discount_pct": 44,
    "savings": 110.0
@@ -98,7 +98,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "22dfd643aab84812",
    "discount_pct": 44,
    "savings": 75.04
@@ -115,7 +115,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "6233ad844ff6b108",
    "discount_pct": 39,
    "savings": 250.0
@@ -132,7 +132,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "d4e794698ed90187",
    "discount_pct": 39,
    "savings": 70.0
@@ -149,7 +149,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "05146b4424a405ef",
    "discount_pct": 38,
    "savings": 803.0
@@ -166,7 +166,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "fa9c6365509d2811",
    "discount_pct": 38,
    "savings": 171.99
@@ -183,7 +183,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "9b16b8c5c6a6a259",
    "discount_pct": 38,
    "savings": 90.01
@@ -200,7 +200,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "e1c76458a74d1080",
    "discount_pct": 37,
    "savings": 702.0
@@ -217,7 +217,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "685f30cc629959df",
    "discount_pct": 37,
    "savings": 110.0
@@ -234,7 +234,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "44072c745f33b7a5",
    "discount_pct": 37,
    "savings": 52.03
@@ -251,7 +251,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "e332b2e9e9db9ad0",
    "discount_pct": 36,
    "savings": 270.0
@@ -268,7 +268,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "79e095b1aed15876",
    "discount_pct": 31,
    "savings": 249.01
@@ -285,7 +285,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "3cfff4782655bd7e",
    "discount_pct": 30,
    "savings": 300.0
@@ -302,7 +302,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "35ea58775066ccc0",
    "discount_pct": 30,
    "savings": 60.0
@@ -319,7 +319,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "0aee815c8cb66e4a",
    "discount_pct": 23,
    "savings": 250.0
@@ -336,7 +336,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "d5ff9abff922ebfb",
    "discount_pct": 21,
    "savings": 300.0
@@ -353,7 +353,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "ddd93c9ae43421f4",
    "discount_pct": 20,
    "savings": 170.0
@@ -370,7 +370,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "632648040b873e92",
    "discount_pct": 18,
    "savings": 250.0
@@ -387,7 +387,7 @@
    "coupon": null,
    "expires": null,
    "source": "seed",
-   "seen_at": "2026-11-20T20:26:12+00:00",
+   "seen_at": "2026-11-21T07:15:27+00:00",
    "id": "2cc56280c5321bfe",
    "discount_pct": 10,
    "savings": 50.99
