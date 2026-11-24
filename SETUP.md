@@ -132,9 +132,12 @@ But it can't power this site. **An MCP connector only works inside a Claude
 conversation.** It cannot run at 4am from GitHub Actions with nobody watching.
 Your site needs an unattended pipeline; that tool needs you present and typing.
 
-Where it's genuinely useful: one-off research. "Pull every product off this
-brand's catalog so I can see their price ladder" — that's a good use. Export
-the CSV, drop it in `data/`, done. Just don't build the daily refresh on it.
+How DealRadar uses it: you scrape a sale page in a Claude/ChatGPT session,
+export CSV or JSON as `data/scraped/<store>_<YYYY-MM-DD>.csv`, and push.
+`scripts/sources/scraped_files.py` merges it on the next refresh (a push to
+`data/scraped/` triggers one). Files expire after 3 days so stale prices don't
+linger. See `data/scraped/README.md` for the prompt to use. Keep affiliate
+feeds as the backbone; scraped rows earn no commission.
 
 ---
 

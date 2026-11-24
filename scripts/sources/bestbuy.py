@@ -15,12 +15,14 @@ import urllib.parse
 import urllib.request
 import json
 import logging
+import time
 
 from .base import Deal, Source, classify
 
 log = logging.getLogger(__name__)
 
 ENDPOINT = "https://api.bestbuy.com/v1/products"
+PAGES = 3
 
 
 class BestBuySource(Source):
@@ -28,16 +30,10 @@ class BestBuySource(Source):
 
     def __init__(self, page_size: int = 100, min_discount: int = 15):
         self.api_key = os.getenv("BESTBUY_API_KEY", "").strip()
-        self.affiliate_tag = os.getenv("BESTBUY_AFFILIATE_URL", "").strip()
         self.page_size = page_size
         self.min_discount = min_discount
         self.enabled = bool(self.api_key)
-
-    def _affiliate(self, url: str) -> str:
-        """Wrap in your tracking link if configured. No tag = plain link."""
-        if not self.affiliate_tag:
-            return url
-        return self.affiliate_tag + urllib.parse.quote(url, safe="")
+        # Affiliate tagging happens centrally in scripts/affiliate.py.
 
     def fetch(self) -> list[Deal]:
         if not self.enabled:
@@ -53,20 +49,28 @@ class BestBuySource(Source):
             "sort": "percentSavings.desc",
             "show": ",".join([
                 "sku", "name", "salePrice", "regularPrice", "percentSavings",
-                "url", "image", "onlineAvailability",
+                "url", "image", "largeFrontImage", "onlineAvailability",
             ]),
         }
-        url = f"{ENDPOINT}{query}?{urllib.parse.urlencode(params)}"
-
-        try:
-            with urllib.request.urlopen(url, timeout=30) as resp:
-                payload = json.load(resp)
-        except Exception as exc:
-            log.warning("bestbuy fetch failed: %s", exc)
-            return []
+        products: list[dict] = []
+        for page in range(1, PAGES + 1):
+            params["page"] = str(page)
+            url = f"{ENDPOINT}{query}?{urllib.parse.urlencode(params)}"
+            try:
+                with urllib.request.urlopen(url, timeout=30) as resp:
+                    payload = json.load(resp)
+            except Exception as exc:
+                log.warning("bestbuy page %d failed: %s", page, exc)
+                break
+            products.extend(payload.get("products", []))
+            if page >= payload.get("totalPages", 1):
+                break
+            time.sleep(0.5)  # free keys allow 5 requests/second
 
         deals: list[Deal] = []
-        for p in payload.get("products", []):
+        for p in products:
+            if p.get("onlineAvailability") is False:
+                continue
             sale, regular = p.get("salePrice"), p.get("regularPrice")
             if not sale or not regular or sale >= regular:
                 continue
@@ -76,12 +80,12 @@ class BestBuySource(Source):
             title = p.get("name", "").strip()
             deals.append(Deal(
                 title=title,
-                url=self._affiliate(p.get("url", "")),
+                url=p.get("url", ""),
                 store="Best Buy",
                 price=float(sale),
                 list_price=float(regular),
                 category=classify(title),
-                image=p.get("image"),
+                image=p.get("largeFrontImage") or p.get("image"),
                 source=self.name,
             ))
         log.info("bestbuy: %d deals", len(deals))

@@ -25,22 +25,31 @@ Actions is the backend. Pages is the front end. Both free on a public repo.
   refresh.yml      scheduled collection, commits the data
   deploy.yml       publishes site/ + data/ to Pages
 scripts/
-  collect.py       orchestrator: fetch, dedupe, rank, write
+  collect.py       orchestrator: fetch, dedupe, rank, tag links, history
+  affiliate.py     rewrites every link with your affiliate IDs
   holidays.py      US retail calendar (Black Friday, Cyber Monday, ...)
   sources/
-    bestbuy.py         free retailer API         — tier 1
-    affiliate_feed.py  CJ/Impact/Rakuten CSV     — tier 1
-    rss_deals.py       syndicated feeds          — tier 2
+    bestbuy.py         free retailer API                 — tier 1
+    affiliate_feed.py  Impact/CJ feeds (Walmart, Target) — tier 1
+    shopify.py         public Shopify catalogs, no key
+    rss_deals.py       syndicated feeds                  — tier 2
+    scraped_files.py   Ultimate Web Scraper exports
     seed.py            labeled sample data
 site/              the whole front end, no build step
 data/deals.json    generated; committed so Pages can serve it
+data/history.json  per-product price history (powers "lowest price" + charts)
 ```
+
+**[AFFILIATE.md](AFFILIATE.md): how the site makes money.**
 
 ## Design
 
-A price list, not a card grid. The discount percentage is the largest element
-in every row because that's what people scan for. Rows sorted by percentage
-off, dollars saved as tiebreak — a 60%-off $20 item beats a 5%-off TV.
+Product cards with the discount badge as the loudest element, because that's
+what people scan for. "Hottest" sort weighs % off, dollars saved, freshness
+and whether it's the lowest price tracked. Every deal opens a detail view with
+its price history, so a real markdown is distinguishable from a fake one.
+Filters, sort, saved deals and individual deals all live in the URL, so any
+view is a shareable link. Dark mode follows the system and can be toggled.
 
 The one loud moment is the countdown to the next retail event, which the site
 computes itself from `holidays.py` rather than anyone editing a date.
@@ -57,11 +66,14 @@ If a store you want has no feed, apply to their affiliate program.
 
 ## Local
 
-```bash
-pip install -r requirements.txt
-python scripts/collect.py
-cd site && python -m http.server 8000
+```powershell
+py -m pip install -r requirements.txt
+py scripts\collect.py
+Remove-Item -Recurse -Force _site -ErrorAction SilentlyContinue
+Copy-Item -Recurse site _site; New-Item -ItemType Directory _site\data | Out-Null
+Copy-Item data\deals.json _site\data\
+py -m http.server 8000 --directory _site
 ```
 
-Visit localhost:8000. With no API keys set it writes labeled sample data and
-the page shows a banner saying so.
+Visit localhost:8000. The Shopify stores in `sources.yml` need no keys, so
+real deals appear on the first run.

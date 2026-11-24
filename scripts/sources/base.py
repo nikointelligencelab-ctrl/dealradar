@@ -104,11 +104,23 @@ CATEGORY_RULES = [
     (r"\btv\b|oled|qled|mini-?led|roku|soundbar|projector|"
      r"headphone|earbud|airpod|speaker|turntable|receiver|\bhi-?fi\b",
      "tv-audio"),
+    (r"deodorant|shampoo|conditioner|body wash|\bsoap\b|lotion|toothpaste|"
+     r"sunscreen|\blip\b|skincare|serum|moisturi[sz]er|fragrance|perfume|"
+     r"cologne|razor|makeup|mascara", "beauty"),
     (r"vacuum|air fryer|mattress|cookware|blender|instant pot|"
-     r"pressure cooker|coffee|espresso|mixer|\bpan\b|sheets|towel",
-     "home"),
-    (r"jacket|shoe|sneaker|\bboot|hood(ie|y)|jeans|\bwatch\b|"
-     r"parka|fleece|\bvest\b|backpack|sandal", "apparel"),
+     r"pressure cooker|coffee|espresso|mixer|\bpan\b|sheets?\b|towel|"
+     r"duvet|comforter|pillow|\bshams?\b|blanket|quilt|\bmugs?\b|tumbler|candle|"
+     r"\brugs?\b|bedding|\bthrow\b|kitchen|\bcups?\b|bottle", "home"),
+    (r"jacket|shoe|sneaker|\bboot|hood(ie|y)|jeans?\b|\bwatch(es)?\b|"
+     r"parka|fleece|\bvest\b|backpack|sandal|\bpants?\b|trouser|chino|"
+     r"\bdress(es)?\b|skirt|shirt|\btees?\b|sweater|cardigan|blazer|"
+     r"\bcoat\b|\bsocks?\b|\bshorts?\b|legging|\bbras?\b|\btops?\b|"
+     r"\bpolo\b|jogger|sweatpant|pullover|crewneck|\bbelt\b|\bhat\b|"
+     r"\bbeanie\b|loafer|\bflats?\b|slipper|\bmules?\b|bracelet|"
+     r"necklace|earring|\brings?\b|anklet|wallet|\bbag\b|tote|duffel|"
+     r"underwear|boxer|swim|bikini|romper|jumpsuit|overalls?|henley|"
+     r"turtleneck|\bknit\b|shacket|anorak|windbreaker|puffer|skort|"
+     r"\btank\b|scarf|glove|sunglass|eyewear|\bglasses\b", "apparel"),
     (r"drill|\bsaw\b|tool|generator|mower|wrench|compressor|ladder",
      "tools"),
     (r"kindle|e-?reader|fitbit|garmin|smartwatch|fenix", "other"),

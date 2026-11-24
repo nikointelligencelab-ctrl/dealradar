@@ -4,8 +4,48 @@ rss_feeds: []
   # - url: https://example.com/deals/feed
   #   store: Example
 
+# Shopify stores: no key needed, read from each store's public /products.json.
+# US-dollar stores only (prices come in the store's own currency). All of
+# these answered on 2026-11-23; add any Shopify brand the same way.
+# `category` is the fallback when a product title doesn't reveal one
+# (computers, tv-audio, phones-tablets, gaming, home, apparel, beauty, toys, tools).
+shopify_stores:
+  - { domain: www.allbirds.com,          store: Allbirds,          category: apparel }
+  - { domain: www.brooklinen.com,        store: Brooklinen,        category: home }
+  - { domain: www.taylorstitch.com,      store: Taylor Stitch,     category: apparel }
+  - { domain: www.deathwishcoffee.com,   store: Death Wish Coffee, category: home }
+  - { domain: www.outdoorvoices.com,     store: Outdoor Voices,    category: apparel }
+  - { domain: www.mvmt.com,              store: MVMT,              category: apparel }
+  - { domain: www.skullcandy.com,        store: Skullcandy,        category: tv-audio }
+  - { domain: www.ridgewallet.com,       store: Ridge,             category: apparel }
+  - { domain: www.nativecos.com,         store: Native,            category: beauty }
+  - { domain: www.cotopaxi.com,          store: Cotopaxi,          category: apparel }
+  - { domain: www.rothys.com,            store: Rothy's,           category: apparel }
+  - { domain: www.ugmonk.com,            store: Ugmonk,            category: home }
+  - { domain: www.everlane.com,          store: Everlane,          category: apparel }
+  - { domain: www.puravidabracelets.com, store: Pura Vida,         category: apparel }
+  - { domain: www.packagefreeshop.com,   store: Package Free,      category: home }
+
+# Affiliate links - THIS IS WHERE THE MONEY COMES FROM.
+# Every deal link is rewritten by the first rule that matches its store name
+# or domain. Uncomment a rule once you're approved and paste the deep-link
+# template from that network's link builder ({url} = encoded product link).
+# The numbers below are placeholders. See AFFILIATE.md for where to sign up.
+affiliate: []
+  # - match: [bestbuy.com]                  # Impact
+  #   template: "https://bestbuy.7tiv.net/c/YOUR_ID/614286/10014?u={url}"
+  # - match: [walmart.com]                  # Impact
+  #   template: "https://goto.walmart.com/c/YOUR_ID/568844/9383?u={url}"
+  # - match: [target.com]                   # Impact
+  #   template: "https://goto.target.com/c/YOUR_ID/81938/2092?u={url}"
+  # - match: [amazon.com]                   # Amazon Associates
+  #   params: { tag: yourtag-20 }
+  # - match: [allbirds.com]                 # brand programs: same idea
+  #   template: "https://YOUR_NETWORK_LINK?url={url}"
+
 # Tier-1 sources are configured by environment variable, not here, because
 # they carry credentials. See SETUP.md:
 #   BESTBUY_API_KEY        free key from developer.bestbuy.com
 #   BESTBUY_AFFILIATE_URL  your tracking link prefix (optional)
-#   AFFILIATE_FEED_URLS    comma-separated CSV feed URLs from CJ/Impact/etc.
+#   AFFILIATE_FEED_URLS    comma-separated product feed URLs from Impact/CJ/etc.
+#                          Label each: Walmart=https://...,Target=https://...
